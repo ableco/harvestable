@@ -3,6 +3,16 @@ require "her"
 require "harvest/version"
 require "harvest/authentication_middleware"
 require "harvest/response_middleware"
+require "harvest/base"
+require "harvest/client"
+require "harvest/project"
+require "harvest/user"
+require "harvest/role"
+require "harvest/task"
+require "harvest/user_assignment"
+require "harvest/task_assignment"
+require "harvest/time_entry"
+
 
 module Harvest
   class << self
@@ -37,6 +47,7 @@ module Harvest
         c.use Harvest::AuthenticationMiddleware, @access_token, @account_id
 
         # Response
+        c.use Harvest::ResponseMiddleware
         if ENV["DEBUG"] || @debug_responses
           c.use Faraday::Response::Logger, nil, { headers: true, bodies: true }
         end
