@@ -13,7 +13,7 @@ module Harvest
 
       {
         :data => data,
-        :errors => json[:errors],
+        :errors => json[:errors] || [],
         :metadata => json[:metadata]
       }
     end

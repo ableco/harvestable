@@ -3,7 +3,9 @@ PATH
   specs:
     harvest (0.1.0)
       activemodel (~> 5.1.6)
+      faraday_middleware (>= 0.12)
       her (>= 0.10)
+      net-http-persistent (>= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -16,9 +18,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.2)
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
-    her (1.0.1)
+    faraday_middleware (0.12.2)
+      faraday (>= 0.7.4, < 1.0)
+    her (1.0.2)
       activemodel (>= 4.2.1)
       faraday (>= 0.8, < 1.0)
       multi_json (~> 1.7)
@@ -27,6 +32,8 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
+    net-http-persistent (3.0.0)
+      connection_pool (~> 2.2)
     rake (10.5.0)
     thread_safe (0.3.6)
     tzinfo (1.2.5)

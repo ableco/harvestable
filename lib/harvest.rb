@@ -1,4 +1,5 @@
 require "her"
+require "faraday_middleware"
 
 require "harvest/version"
 require "harvest/authentication_middleware"
@@ -45,6 +46,9 @@ module Harvest
       @connection.setup url: @base_url, ssl: @ssl_options, proxy: @proxy, send_only_modified_attributes: @send_only_modified_attributes do |c|
         # Authentication
         c.use Harvest::AuthenticationMiddleware, @access_token, @account_id
+
+        # Request
+        c.use FaradayMiddleware::EncodeJson
 
         # Response
         c.use Harvest::ResponseMiddleware
