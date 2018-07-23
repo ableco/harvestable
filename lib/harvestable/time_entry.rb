@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class TimeEntry < Base
     attributes :project_id, :task_id, :spent_date
 

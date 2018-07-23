@@ -1,21 +1,21 @@
 require "her"
 require "faraday_middleware"
 
-require "harvest/version"
-require "harvest/authentication_middleware"
-require "harvest/response_middleware"
-require "harvest/base"
-require "harvest/client"
-require "harvest/project"
-require "harvest/user"
-require "harvest/role"
-require "harvest/task"
-require "harvest/user_assignment"
-require "harvest/task_assignment"
-require "harvest/time_entry"
+require "harvestable/version"
+require "harvestable/authentication_middleware"
+require "harvestable/response_middleware"
+require "harvestable/base"
+require "harvestable/client"
+require "harvestable/project"
+require "harvestable/user"
+require "harvestable/role"
+require "harvestable/task"
+require "harvestable/user_assignment"
+require "harvestable/task_assignment"
+require "harvestable/time_entry"
 
 
-module Harvest
+module Harvestable
   class << self
     attr_accessor :configuration
 
@@ -39,19 +39,19 @@ module Harvest
       @account_id = nil
       @debug_responses = false
       @base_url = 'https://api.harvestapp.com/v2/'
-      @user_agent = "Harvest Ruby client (v#{Harvest::VERSION})"
+      @user_agent = "Harvestable Ruby client (v#{Harvestable::VERSION})"
     end
 
     def setup_connection
       @connection.setup url: @base_url, ssl: @ssl_options, proxy: @proxy, send_only_modified_attributes: @send_only_modified_attributes do |c|
         # Authentication
-        c.use Harvest::AuthenticationMiddleware, @access_token, @account_id
+        c.use Harvestable::AuthenticationMiddleware, @access_token, @account_id
 
         # Request
         c.use FaradayMiddleware::EncodeJson
 
         # Response
-        c.use Harvest::ResponseMiddleware
+        c.use Harvestable::ResponseMiddleware
         if ENV["DEBUG"] || @debug_responses
           c.use Faraday::Response::Logger, nil, { headers: true, bodies: true }
         end

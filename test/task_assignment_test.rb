@@ -4,9 +4,9 @@ class TaskAssignmentTest < Minitest::Test
   include StubRequests
 
   def setup
-    Harvest.configure {}
+    Harvestable.configure {}
 
-    stub_api_for(Harvest::TaskAssignment) do |stub|
+    stub_api_for(Harvestable::TaskAssignment) do |stub|
       task_assignment_attributes = { id: 12345, project: {  id: 1, name: "Pet Store", code: "PS" }, task: { id: 1, name: "Research" } }
       stub.get("/task_assignments") { |env| [200, {}, { task_assignments: [task_assignment_attributes] }.to_json] }
       stub.get("/projects/1/task_assignments") { |env| [200, {}, { task_assignments: [task_assignment_attributes] }.to_json] }
@@ -15,7 +15,7 @@ class TaskAssignmentTest < Minitest::Test
   end
 
   def test_find_for_project
-    task_assignment = Harvest::TaskAssignment.find("12345", project_id: 1)
+    task_assignment = Harvestable::TaskAssignment.find("12345", project_id: 1)
 
     assert_equal 12345, task_assignment.id
     assert_equal "Pet Store", task_assignment.project.name
@@ -24,7 +24,7 @@ class TaskAssignmentTest < Minitest::Test
   end
 
   def test_all_for_project
-    task_assignments = Harvest::TaskAssignment.all(project_id: 1)
+    task_assignments = Harvestable::TaskAssignment.all(project_id: 1)
     task_assignment = task_assignments.first
 
     assert_equal 12345, task_assignment.id
@@ -34,7 +34,7 @@ class TaskAssignmentTest < Minitest::Test
   end
 
   def test_all
-    task_assignments = Harvest::TaskAssignment.all
+    task_assignments = Harvestable::TaskAssignment.all
     task_assignment = task_assignments.first
 
     assert_equal 12345, task_assignment.id

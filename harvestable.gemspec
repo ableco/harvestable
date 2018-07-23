@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "harvest/version"
+require "harvestable/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "harvest"
-  spec.version       = Harvest::VERSION
+  spec.name          = "harvestable"
+  spec.version       = Harvestable::VERSION
   spec.authors       = ["Guillermo Iguaran"]
   spec.email         = ["guilleiguaran@gmail.com"]
 
   spec.summary       = %q{Harvest v2 API library for Ruby.}
   spec.description   = %q{Harvest v2 API library for Ruby.}
-  spec.homepage      = "https://github.com/ableco"
+  spec.homepage      = "https://github.com/ableco/harvestable"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class Project < Base
     belongs_to :client
 

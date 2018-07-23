@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class UserAssignment < Base
     collection_path "projects/:project_id/user_assignments"
     resource_path "projects/:project_id/user_assignments/:id"

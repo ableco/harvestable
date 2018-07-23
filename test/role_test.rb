@@ -4,16 +4,16 @@ class RoleTest < Minitest::Test
   include StubRequests
 
   def setup
-    Harvest.configure {}
+    Harvestable.configure {}
 
-    stub_api_for(Harvest::Role) do |stub|
+    stub_api_for(Harvestable::Role) do |stub|
       role_attributes = { id: 1, name: "Developer", user_ids: [1] }
 
       stub.get("/roles/1") { |env| [200, {}, role_attributes.to_json] }
       stub.get("/roles") { |env| [200, {}, { roles: [role_attributes] }.to_json] }
     end
 
-    stub_api_for(Harvest::User) do |stub|
+    stub_api_for(Harvestable::User) do |stub|
       user_attributes = { id: 1, first_name: "Guillermo", last_name: "Iguaran", email: "guille@example.com", is_active: true }
 
       stub.get("/users/1") { |env| [200, {}, user_attributes.to_json] }
@@ -21,7 +21,7 @@ class RoleTest < Minitest::Test
   end
 
   def test_find
-    role = Harvest::Role.find("1")
+    role = Harvestable::Role.find("1")
 
     assert_equal 1, role.id
     assert_equal "Developer", role.name
@@ -31,7 +31,7 @@ class RoleTest < Minitest::Test
   end
 
   def test_all
-    roles = Harvest::Role.all.to_a
+    roles = Harvestable::Role.all.to_a
     role = roles.first
 
     assert_equal 1, roles.size

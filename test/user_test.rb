@@ -4,9 +4,9 @@ class UserTest < Minitest::Test
   include StubRequests
 
   def setup
-    Harvest.configure {}
+    Harvestable.configure {}
 
-    stub_api_for(Harvest::User) do |stub|
+    stub_api_for(Harvestable::User) do |stub|
       user1_attributes = { id: 1, first_name: "John", last_name: "Doe", email: "john@example.com", is_active: false }
       user2_attributes = { id: 2, first_name: "Guillermo", last_name: "Iguaran", email: "guille@example.com", is_active: true }
       stub.get("/users/1") { |env| [200, {}, user1_attributes.to_json] }
@@ -17,7 +17,7 @@ class UserTest < Minitest::Test
   end
 
   def test_find
-    user = Harvest::User.find("1")
+    user = Harvestable::User.find("1")
 
     assert_equal 1, user.id
     assert_equal "John", user.first_name
@@ -26,7 +26,7 @@ class UserTest < Minitest::Test
   end
 
   def test_all
-    users = Harvest::User.all.to_a
+    users = Harvestable::User.all.to_a
 
     assert_equal 2, users.size
     assert_equal 1, users.first.id
@@ -40,7 +40,7 @@ class UserTest < Minitest::Test
   end
 
   def test_active
-    users = Harvest::User.active
+    users = Harvestable::User.active
 
     assert_equal 1, users.size
     assert_equal "Guillermo", users.first.first_name
@@ -49,7 +49,7 @@ class UserTest < Minitest::Test
   end
 
   def test_me
-    user = Harvest::User.me
+    user = Harvestable::User.me
 
     assert_equal 2, user.id
     assert_equal "Guillermo", user.first_name

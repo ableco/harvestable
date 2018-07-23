@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class AuthenticationMiddleware < Faraday::Middleware
     AUTH_HEADER = "Authorization".freeze unless defined? AUTH_HEADER
     HARVEST_HEADER = "Harvest-Account-Id".freeze unless defined? HARVEST_HEADER

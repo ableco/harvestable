@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class ResponseMiddleware < Her::Middleware::ParseJSON
     def parse(body)
       json = parse_json(body)

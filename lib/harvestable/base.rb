@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class ValidationError < ::StandardError
     def initialize(errors)
       @errors = errors
@@ -11,7 +11,7 @@ module Harvest
 
   class Base
     include Her::Model
-    use_api -> { Harvest.configuration.connection }
+    use_api -> { Harvestable.configuration.connection }
 
     def save
       if valid?

@@ -1,4 +1,4 @@
-module Harvest
+module Harvestable
   class User < Base
     scope :active, -> { where(is_active: "true") }
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    harvest (0.1.0)
+    harvestable (0.1.0)
       activemodel (~> 5.1.6)
       faraday_middleware (>= 0.12)
       her (>= 0.10)
@@ -44,9 +44,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  harvest!
+  harvestable!
   minitest (~> 5.0)
   rake (~> 10.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.3

@@ -4,9 +4,9 @@ class TimeEntryTest < Minitest::Test
   include StubRequests
 
   def setup
-    Harvest.configure {}
+    Harvestable.configure {}
 
-    stub_api_for(Harvest::TimeEntry) do |stub|
+    stub_api_for(Harvestable::TimeEntry) do |stub|
       user = { id: 1, name: "Guillermo Iguaran" }
       client = { id: 1, name: "Able" }
       project = { id: 1, name: "Pet Store" }
@@ -19,7 +19,7 @@ class TimeEntryTest < Minitest::Test
   end
 
   def test_find
-    time_entry = Harvest::TimeEntry.find("123")
+    time_entry = Harvestable::TimeEntry.find("123")
 
     assert_equal 123, time_entry.id
     assert_equal "Guillermo Iguaran", time_entry.user.name
@@ -32,7 +32,7 @@ class TimeEntryTest < Minitest::Test
   end
 
   def test_all
-    time_entries = Harvest::TimeEntry.all
+    time_entries = Harvestable::TimeEntry.all
     time_entry = time_entries.first
 
     assert_equal 123, time_entry.id
@@ -46,7 +46,7 @@ class TimeEntryTest < Minitest::Test
   end
 
   def test_create_with_valid_attrs
-    time_entry = Harvest::TimeEntry.create(project_id: 1, task_id: 1, spent_date: "2017-03-21", hours: 2.0)
+    time_entry = Harvestable::TimeEntry.create(project_id: 1, task_id: 1, spent_date: "2017-03-21", hours: 2.0)
 
     assert_equal 123, time_entry.id
     assert_equal "Guillermo Iguaran", time_entry.user.name
@@ -57,9 +57,9 @@ class TimeEntryTest < Minitest::Test
   end
 
   def test_create_with_invalid_attrs
-    time_entry = Harvest::TimeEntry.new(hours: 2.0)
+    time_entry = Harvestable::TimeEntry.new(hours: 2.0)
 
-    assert_raises Harvest::ValidationError do
+    assert_raises Harvestable::ValidationError do
       time_entry.save
     end
 
