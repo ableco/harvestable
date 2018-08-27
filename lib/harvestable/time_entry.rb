@@ -9,6 +9,7 @@ module Harvestable
     belongs_to :user_assignment
     belongs_to :task_assignment
 
-    validates :project_id, :task_id, :spent_date, presence: true
+    validates :project_id, :task_id, presence: true, on: :create
+    validates :spent_date, presence: true
   end
 end
