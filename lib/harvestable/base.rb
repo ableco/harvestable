@@ -20,5 +20,10 @@ module Harvestable
         raise ValidationError.new(self.errors)
       end
     end
+
+    def update(attributes)
+      assign_attributes(attributes)
+      save
+    end
   end
 end
