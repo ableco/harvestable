@@ -13,6 +13,14 @@ module Harvestable
     include Her::Model
     use_api -> { Harvestable.configuration.connection }
 
+    def self.page(page)
+      where.page(page)
+    end
+
+    def self.per_page(per_page)
+      where.per_page(per_page)
+    end
+
     def save
       if valid?
         super

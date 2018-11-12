@@ -5,6 +5,8 @@ require "harvestable/version"
 require "harvestable/authentication_middleware"
 require "harvestable/response_middleware"
 require "harvestable/base"
+require "harvestable/pagination"
+
 require "harvestable/client"
 require "harvestable/project"
 require "harvestable/user"
