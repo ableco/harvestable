@@ -63,8 +63,6 @@ class TimeEntryTest < Minitest::Test
       time_entry.save
     end
 
-    assert_equal "can't be blank", time_entry.errors[:task_id].first
-    assert_equal "can't be blank", time_entry.errors[:project_id].first
     assert_equal "can't be blank", time_entry.errors[:spent_date].first
   end
 end
