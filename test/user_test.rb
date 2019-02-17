@@ -12,7 +12,8 @@ class UserTest < Minitest::Test
       stub.get("/users/1") { |env| [200, {}, user1_attributes.to_json] }
       stub.get("/users/me") { |env| [200, {}, user2_attributes.to_json] }
       stub.get("/users?is_active=true") { |env| [200, {}, { users: [user2_attributes] }.to_json] }
-      stub.get("/users") { |env| [200, {}, { users: [user1_attributes, user2_attributes] }.to_json] }
+      stub.get("/users?per_page=100&page=1") { |env| [200, {}, { users: 100.times.map { user1_attributes } }.to_json] }
+      stub.get("/users?per_page=100&page=2") { |env| [200, {}, { users: [user2_attributes] }.to_json] }
     end
   end
 
@@ -28,7 +29,7 @@ class UserTest < Minitest::Test
   def test_all
     users = Harvestable::User.all.to_a
 
-    assert_equal 2, users.size
+    assert_equal 101, users.size
     assert_equal 1, users.first.id
     assert_equal "John", users.first.first_name
     assert_equal "Doe", users.first.last_name
