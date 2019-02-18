@@ -3,28 +3,19 @@ module Harvestable
     def parse(body)
       json = parse_json(body)
 
-      collection_key, collection_data = json.find{|_, v| v.is_a?(Array)}
-      data =
-        if json[:id]
-          json
-        else
-          collection_data || json
-        end
+      _collection_key, collection_data = json.find { |_, v| v.is_a?(Array) }
+
+      data = json[:id] ? json : collection_data || json
 
       {
-        :data => data,
-        :errors => json[:errors] || [],
-        :metadata => json[:metadata]
+        data: data,
+        errors: json[:errors] || [],
+        metadata: json[:metadata]
       }
     end
 
     def on_complete(env)
-      env[:body] = case env[:status]
-                   when 204
-                     parse('{}')
-                   else
-                     parse(env[:body])
-                   end
+      env[:body] = env[:status] == 204 ? parse('{}') : parse(env[:body])
     end
   end
 end

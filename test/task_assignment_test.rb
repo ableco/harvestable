@@ -24,7 +24,7 @@ class TaskAssignmentTest < Minitest::Test
   end
 
   def test_all_for_project
-    task_assignments = Harvestable::TaskAssignment.all(project_id: 1)
+    task_assignments = Harvestable::TaskAssignment.where(project_id: 1)
     task_assignment = task_assignments.first
 
     assert_equal 12345, task_assignment.id
