@@ -1,7 +1,9 @@
 module Harvestable
   class User < Base
-    scope :active, -> { where(is_active: "true") }
-
+    # Custom Requests
     custom_get :me
+
+    # Scopes
+    scope :active, -> { where(is_active: "true") }
   end
 end

@@ -1,11 +1,13 @@
 require "her"
 require "faraday_middleware"
 
+# Support
 require "harvestable/version"
 require "harvestable/authentication_middleware"
 require "harvestable/response_middleware"
 require "harvestable/base"
 
+# Resources
 require "harvestable/client"
 require "harvestable/project"
 require "harvestable/user"
@@ -38,7 +40,7 @@ module Harvestable
       @access_token = nil
       @account_id = nil
       @debug_responses = false
-      @base_url = 'https://api.harvestapp.com/v2/'
+      @base_url = "https://api.harvestapp.com/v2/"
       @user_agent = "Harvestable Ruby client (v#{Harvestable::VERSION})"
     end
 
@@ -53,7 +55,7 @@ module Harvestable
         # Response
         c.use Harvestable::ResponseMiddleware
         if ENV["DEBUG"] || @debug_responses
-          c.use Faraday::Response::Logger, nil, { headers: true, bodies: true }
+          c.use Faraday::Response::Logger, nil, headers: true, bodies: true
         end
 
         # Adapter
