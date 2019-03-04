@@ -15,7 +15,7 @@ module Harvestable
     end
 
     def on_complete(env)
-      env[:body] = env[:status] == 204 ? parse('{}') : parse(env[:body])
+      env[:body] = env[:status] == 204 ? parse("{}") : parse(env[:body])
     end
   end
 end

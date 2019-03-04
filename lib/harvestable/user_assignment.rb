@@ -1,17 +1,28 @@
 module Harvestable
   class UserAssignment < Base
-    collection_path "projects/:project_id/user_assignments"
+    # Custom Paths
     resource_path "projects/:project_id/user_assignments/:id"
 
+    # Associations
     belongs_to :user
     belongs_to :project
 
-    def self.all(*params)
-      if params.empty?
-        get("/user_assignments")
-      else
-        super(*params)
-      end
+    # Callbacks
+    after_initialize :set_project_id
+    after_initialize :set_user_id
+
+    private
+
+    def set_project_id
+      return if project.nil?
+
+      self.project_id = project.id
+    end
+
+    def set_user_id
+      return if user.nil?
+
+      self.user_id = user.id
     end
   end
 end
