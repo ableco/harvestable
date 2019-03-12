@@ -12,6 +12,10 @@ module Harvestable
     after_initialize :set_project_id
     after_initialize :set_user_id
 
+    def self.all
+      raise NotImplementedError, "method has yet to be implemented"
+    end
+
     private
 
     def set_project_id
