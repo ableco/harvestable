@@ -1,6 +1,7 @@
 module Harvestable
   class TaskAssignment < Base
     # Custom Paths
+    collection_path "projects/:project_id/task_assignments"
     resource_path "projects/:project_id/task_assignments/:id"
 
     # Associations
